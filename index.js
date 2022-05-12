@@ -13,7 +13,8 @@ dotenv.config({
   path: './config.env',
 });
 
-const URI = process.env.URI;
+const URI =
+  'URI=mongodb+srv://gauravsingh9356:mypasswordforgskart@cluster0.zqexm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 mongoose.connect(URI, (err) => {
   if (err) console.log(err);
   else console.log('Connected to DB!');
