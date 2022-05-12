@@ -21,10 +21,11 @@ mongoose.connect(URI, (err) => {
 });
 
 const app = express();
+
 app.use(
   cors({
     credentials: true,
-    origin: '*',
+    origin: ['http://localhost:5000', 'https://gskart.netlify.app'],
   })
 );
 
