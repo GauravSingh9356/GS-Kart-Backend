@@ -12,32 +12,25 @@ const User = require('../Models/User');
 
 const router = express.Router();
 
-router.put(
-  '/:id',
-  verifyToken,
-  verifyTokenAndAuthorisation,
-  async (req, res) => {
-    if (req.body.password) {
-      req.body.password = await bcrypt.hash(req.body.password, 12);
-    }
-
-    try {
-      const updatedUser = await User.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        {
-          new: true,
-        }
-      );
-
-      return res.status(200).send({
-        updatedUser,
-      });
-    } catch (error) {
-      return res.status(500).send(error);
-    }
+router.patch('/:id', verifyToken, async (req, res) => {
+  if (req.body.password) {
+    req.body.password = await bcrypt.hash(req.body.password, 12);
   }
-);
+
+  try {
+    console.log(req.body);
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+
+    return res.status(200).send({
+      updatedUser,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
+});
 
 router.delete(
   '/:id',
